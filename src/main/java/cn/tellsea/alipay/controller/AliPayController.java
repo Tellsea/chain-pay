@@ -3,8 +3,8 @@ package cn.tellsea.alipay.controller;
 import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
-import cn.tellsea.alipay.config.AlipayConfig;
-import cn.tellsea.alipay.service.AlipayService;
+import cn.tellsea.alipay.config.AliPayConfig;
+import cn.tellsea.alipay.service.AliPayService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * 支付宝支付接口
+ * 支付宝支付接口支付宝支付接口
  * <p>
  * 同步回调和异步回调的区别：https://blog.csdn.net/ruziwang/article/details/82499959
  *
@@ -35,9 +35,9 @@ import java.util.Map;
 public class AliPayController {
 
     @Autowired
-    private AlipayService alipayService;
+    private AliPayService alipayService;
 
-    @ApiOperation("web端-订单支付")
+    @ApiOperation("电脑网站支付")
     @PostMapping("webPagePay")
     public String webPagePay(String outTradeNo, Double totalAmount, String subject, String body) throws AlipayApiException {
         return alipayService.webPagePay(outTradeNo, totalAmount, subject, body);
@@ -80,7 +80,7 @@ public class AliPayController {
         // 获取支付宝GET过来反馈信息
         Map<String, String> params = getReturnParam(request);
         // 调用SDK验证签名
-        boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET, AlipayConfig.SIGN_TYPE);
+        boolean signVerified = AlipaySignature.rsaCheckV1(params, AliPayConfig.ALIPAY_PUBLIC_KEY, AliPayConfig.CHARSET, AliPayConfig.SIGN_TYPE);
         if (signVerified) {
             // 商户订单号
             String out_trade_no = params.get("out_trade_no");
@@ -103,7 +103,7 @@ public class AliPayController {
         log.info("web端-异步回调：");
         Map<String, String> params = getReturnParam(request);
         // 调用SDK验证签名
-        boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.CHARSET, AlipayConfig.SIGN_TYPE);
+        boolean signVerified = AlipaySignature.rsaCheckV1(params, AliPayConfig.ALIPAY_PUBLIC_KEY, AliPayConfig.CHARSET, AliPayConfig.SIGN_TYPE);
         //——请在这里编写您的程序（以下代码仅作参考）——
         /* 实际验证过程建议商户务必添加以下校验：
         1、需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，

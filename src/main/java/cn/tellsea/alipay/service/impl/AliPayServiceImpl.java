@@ -1,11 +1,11 @@
 package cn.tellsea.alipay.service.impl;
 
-import cn.tellsea.alipay.config.AlipayConfig;
+import cn.tellsea.alipay.config.AliPayConfig;
+import cn.tellsea.alipay.service.AliPayService;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.*;
-import cn.tellsea.alipay.service.AlipayService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,18 +17,18 @@ import org.springframework.stereotype.Service;
  */
 @Slf4j
 @Service
-public class AlipayServiceImpl implements AlipayService {
+public class AliPayServiceImpl implements AliPayService {
 
     /**
      * web端支付
      */
-    AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.GATEWAYURL, AlipayConfig.APP_ID, AlipayConfig.MERCHANT_PRIVATE_KEY, "json", AlipayConfig.CHARSET, AlipayConfig.ALIPAY_PUBLIC_KEY, AlipayConfig.SIGN_TYPE);
+    AlipayClient alipayClient = new DefaultAlipayClient(AliPayConfig.GATEWAYURL, AliPayConfig.APP_ID, AliPayConfig.MERCHANT_PRIVATE_KEY, "json", AliPayConfig.CHARSET, AliPayConfig.ALIPAY_PUBLIC_KEY, AliPayConfig.SIGN_TYPE);
 
     @Override
     public String webPagePay(String outTradeNo, Double totalAmount, String subject, String body) throws AlipayApiException {
         AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
-        alipayRequest.setReturnUrl(AlipayConfig.RETURN_URL);
-        alipayRequest.setNotifyUrl(AlipayConfig.NOTIFY_URL);
+        alipayRequest.setReturnUrl(AliPayConfig.RETURN_URL);
+        alipayRequest.setNotifyUrl(AliPayConfig.NOTIFY_URL);
         alipayRequest.setBizContent("{\"out_trade_no\":\"" + outTradeNo + "\","
                 + "\"total_amount\":\"" + totalAmount + "\","
                 + "\"subject\":\"" + subject + "\","
@@ -42,7 +42,7 @@ public class AlipayServiceImpl implements AlipayService {
         //		+ "\"timeout_express\":\"10m\","
         //		+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
         //请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
-        return alipayClient.pageExecute(alipayRequest).getBody().replace('\"','\'').replace('\n',' ');
+        return alipayClient.pageExecute(alipayRequest).getBody();
     }
 
     @Override

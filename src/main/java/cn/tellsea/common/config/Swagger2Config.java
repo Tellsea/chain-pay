@@ -35,7 +35,7 @@ public class Swagger2Config {
         return new ApiInfoBuilder()
                 .title("SpringBoot 后台服务API接口文档")
                 .description("使用 knife4j 搭建的后台服务API接口文档")
-                .termsOfServiceUrl("http://localhost:8081/")
+                .termsOfServiceUrl("http://localhost:8080/")
                 .contact("Tellsea")
                 .version("1.0.0")
                 .build();

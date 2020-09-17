@@ -1,8 +1,14 @@
-server:
-  port: 8081
-
 spring:
   mvc:
     view:
       prefix: /WEB-INF/page/
       suffix: .jsp
+
+wx:
+  pay:
+    appId: wx9b71a430134d4cfb
+    mchId: 1559268181
+    mchKey: ArtfnjY5643gdg797EGfdsf48EG547wh
+    subAppId: #服务商模式下的子商户公众账号ID
+    subMchId: #服务商模式下的子商户号
+    keyPath: static/cert/wxpay/apiclient_cert.p12

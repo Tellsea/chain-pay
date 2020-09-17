@@ -8,10 +8,10 @@ import com.alipay.api.AlipayApiException;
  * @author Tellsea
  * @date 2020-9-15
  */
-public interface AlipayService {
+public interface AliPayService {
 
     /**
-     * web端订单支付
+     * 电脑网站支付
      *
      * @param outTradeNo  订单编号（唯一），必填
      * @param totalAmount 订单价格，必填

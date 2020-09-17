@@ -36,12 +36,18 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+        </dependency>
+
         <!-- knife4j接口文档 start -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
             <artifactId>knife4j-spring-boot-starter</artifactId>
             <version>2.0.2</version>
         </dependency>
+
         <!-- 支付宝sdk -->
         <dependency>
             <groupId>com.alipay.sdk</groupId>
@@ -49,10 +55,22 @@
             <version>4.10.124.ALL</version>
         </dependency>
 
+        <!-- 微信支付 -->
+        <!-- https://mvnrepository.com/artifact/com.github.binarywang/weixin-java-pay -->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-pay</artifactId>
+            <version>3.9.2.B</version>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+
+
+
+
 
         <!-- jsp 配置，目的是集成支付宝官方提供的页面 start -->
         <!-- servlet 依赖 -->
